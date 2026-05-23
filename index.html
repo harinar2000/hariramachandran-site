@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hari Ramachandran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #ffffff;
+    --off-white: #f7f5f0;
+    --gold: #c5a572;
+    --gold-deep: #a88955;
+    --muted: #6b6b6b;
+    --rule: rgba(10,10,10,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Archivo', system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; }
+
+  /* ===== TOP NAV ===== */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+  .logo .gold-mark {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    margin: 0 0.6rem 0.1rem 0;
+    vertical-align: middle;
+    transform: rotate(45deg);
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -6px;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .nav-links a:hover { color: var(--gold-deep); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ===== HERO ===== */
+  .hero {
+    padding: 8rem 0 6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 800px; height: 800px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(197,165,114,0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero .kicker {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: rise 0.8s ease-out 0.1s forwards;
+  }
+  .hero .kicker::before, .hero .kicker::after {
+    content: '';
+    display: inline-block;
+    width: 30px; height: 1px;
+    background: var(--gold);
+    vertical-align: middle;
+    margin: 0 1rem;
+  }
+  .hero h1 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 10vw, 8.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s forwards;
+  }
+  .hero h1 .first {
+    display: block;
+    font-weight: 800;
+  }
+  .hero h1 .last {
+    display: block;
+    font-weight: 900;
+    background: linear-gradient(180deg, var(--ink) 50%, var(--gold-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero .tagline {
+    margin-top: 3rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    color: var(--muted);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+    opacity: 0;
+    animation: rise 1s ease-out 0.6s forwards;
+  }
+  .hero .role-strip {
+    margin-top: 4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem 2rem;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: rise 1s ease-out 0.85s forwards;
+  }
+  .hero .role-strip .dot {
+    width: 4px; height: 4px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== EXPERIENCE ===== */
+  .experience {
+    padding: 7rem 0 6rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+  .exp-card {
+    padding: 3.5rem 3rem;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+    position: relative;
+    transition: background 0.35s ease;
+  }
+  .exp-card:hover { background: var(--off-white); }
+  .exp-card:hover .exp-num { color: var(--gold-deep); }
+  .exp-num {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    transition: color 0.3s;
+  }
+  .exp-title {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+  }
+  .exp-desc {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 400;
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: var(--muted);
+    margin-bottom: 1.75rem;
+  }
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .exp-tags span {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--rule);
+  }
+
+  /* ===== VOICES ===== */
+  .voices {
+    padding: 7rem 0;
+    background: var(--off-white);
+    border-top: 1px solid var(--rule);
+  }
+  .voices-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .voice {
+    background: var(--paper);
+    padding: 3rem 2.25rem 2.5rem;
+    position: relative;
+    border-top: 2px solid var(--gold);
+  }
+  .voice-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    line-height: 0.5;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    height: 1.5rem;
+  }
+  .voice blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 1.75rem;
+  }
+  .voice figcaption {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ===== VENTURES / FIVE LOVES ===== */
+  .ventures {
+    padding: 6rem 0;
+    background: var(--off-white);
+  }
+  .section-heading {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+  .section-heading .label {
+    display: inline-block;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    margin-bottom: 1.5rem;
+  }
+  .section-heading h2 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .section-heading h2 em {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    text-transform: lowercase;
+    letter-spacing: -0.015em;
+    color: var(--gold-deep);
+  }
+
+  .ventures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .venture-card {
+    padding: 0;
+    border: none;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    min-height: 260px;
+    perspective: 1200px;
+    font: inherit;
+    color: inherit;
+    width: 100%;
+  }
+  .venture-card:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+  .venture-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+    z-index: 3;
+  }
+  .venture-card:hover::before { transform: scaleX(1); }
+  .venture-card:hover .v-num { color: var(--gold-deep); }
+  .venture-card:hover .v-hint { opacity: 1; color: var(--gold-deep); }
+
+  .card-face {
+    position: absolute;
+    inset: 0;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .card-front { transform: rotateY(0deg); background: var(--paper); }
+  .card-back  { transform: rotateY(180deg); background: #fdfcf8; }
+  .venture-card[aria-expanded="true"] .card-front { transform: rotateY(-180deg); }
+  .venture-card[aria-expanded="true"] .card-back  { transform: rotateY(0deg); }
+  .venture-card[aria-expanded="true"]::before { transform: scaleX(1); }
+
+  .v-num {
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    transition: color 0.3s;
+  }
+  .v-title {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 1.25rem;
+    transition: letter-spacing 0.4s ease;
+  }
+  .v-divider {
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 1.25rem;
+  }
+  .v-verb {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+  }
+  .v-hint {
+    position: absolute;
+    bottom: 1rem;
+    left: 0; right: 0;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.55;
+    transition: opacity 0.3s, color 0.3s;
+  }
+  .v-story {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 220px;
+  }
+  .v-close {
+    position: absolute;
+    bottom: 1rem;
+    left: 0; right: 0;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    opacity: 0.8;
+  }
+
+  /* Make the grid handle different counts cleanly */
+  @media (min-width: 980px) {
+    .ventures-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+
+  /* ===== STATEMENT ===== */
+  .statement {
+    padding: 8rem 0;
+    text-align: center;
+    background: var(--paper);
+  }
+  .statement .quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    line-height: 1.35;
+    max-width: 820px;
+    margin: 0 auto;
+    color: var(--ink);
+  }
+  .statement .quote::before,
+  .statement .quote::after {
+    color: var(--gold);
+    font-size: 1.2em;
+  }
+  .statement .quote::before { content: '"'; margin-right: 0.1em; }
+  .statement .quote::after { content: '"'; margin-left: 0.1em; }
+  .statement .attribution {
+    margin-top: 2.5rem;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ===== CONTACT ===== */
+  .contact {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 7rem 0;
+    text-align: center;
+  }
+  .contact .label {
+    display: inline-block;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+  .contact h2 {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .contact h2 em {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    text-transform: lowercase;
+    color: var(--gold);
+  }
+  .contact .sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.25rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 520px;
+    margin: 0 auto 3.5rem;
+  }
+  .contact-links {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .c-btn {
+    text-decoration: none;
+    color: var(--paper);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 1.1rem 2rem;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .c-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateX(-101%);
+    transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+    z-index: 0;
+  }
+  .c-btn span { position: relative; z-index: 1; transition: color 0.3s; }
+  .c-btn:hover { border-color: var(--gold); }
+  .c-btn:hover::before { transform: translateX(0); }
+  .c-btn:hover span { color: var(--ink); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.45);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem 0;
+  }
+  .foot-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+  .foot-inner .gold-mark {
+    display: inline-block;
+    width: 5px; height: 5px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    margin-right: 0.6rem;
+    vertical-align: middle;
+  }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+                transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Staggered children within a group */
+  .reveal-group.is-visible > .reveal-child {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-group > .reveal-child {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.85s cubic-bezier(0.2, 0.7, 0.2, 1),
+                transform 0.85s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .reveal-group > .reveal-child:nth-child(1) { transition-delay: 0.00s; }
+  .reveal-group > .reveal-child:nth-child(2) { transition-delay: 0.10s; }
+  .reveal-group > .reveal-child:nth-child(3) { transition-delay: 0.20s; }
+  .reveal-group > .reveal-child:nth-child(4) { transition-delay: 0.30s; }
+  .reveal-group > .reveal-child:nth-child(5) { transition-delay: 0.40s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-group > .reveal-child {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    .card-face { transition: none !important; }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 980px) {
+    .exp-grid { grid-template-columns: 1fr; }
+    .voices-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .wrap, .nav-inner, .foot-inner { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .nav-links { gap: 0.9rem; }
+    .nav-links a { font-size: 0.62rem; letter-spacing: 0.12em; }
+    .hero { padding: 5rem 0 4rem; }
+    .hero .kicker::before, .hero .kicker::after { width: 20px; margin: 0 0.6rem; }
+    .ventures-grid { grid-template-columns: 1fr 1fr; }
+    .venture-card { padding: 2rem 1rem; }
+    .exp-card { padding: 2.5rem 1.75rem; }
+    .voices { padding: 5rem 0; }
+    .statement { padding: 5rem 0; }
+    .contact { padding: 5rem 0; }
+    .foot-inner { flex-direction: column; gap: 0.6rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="logo"><span class="gold-mark"></span>Hari Ramachandran</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#loves">Pursuits</a></li>
+      <li><a href="#voices">Voices</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" id="about">
+  <div class="wrap">
+    <div class="kicker">Personal · Est. 2026</div>
+    <h1>
+      <span class="first">Hari</span>
+      <span class="last">Ramachandran</span>
+    </h1>
+    <p class="tagline">A senior product leader translating bold vision into practical plans — guided by curiosity, patience, and a steady hand.</p>
+    <div class="role-strip">
+      <span>Pfizer</span>
+      <span class="dot"></span>
+      <span>25+ Years</span>
+      <span class="dot"></span>
+      <span>NYC Metro</span>
+    </div>
+  </div>
+</section>
+
+<section class="experience" id="experience">
+  <div class="wrap">
+    <div class="section-heading reveal">
+      <div class="label">— What I Do —</div>
+      <h2>Leading at the <em>intersection</em><br/>of strategy, product, and people.</h2>
+    </div>
+
+    <div class="exp-grid reveal-group">
+      <article class="exp-card reveal-child">
+        <div class="exp-num">01</div>
+        <h3 class="exp-title">Product Leadership · Pfizer</h3>
+        <p class="exp-desc">Senior leader shaping product strategy and execution across one of the world's largest life-sciences enterprises — turning ambitious roadmaps into the steady, day-to-day discipline of getting things built and shipped.</p>
+        <div class="exp-tags">
+          <span>Strategy</span>
+          <span>Product</span>
+          <span>Life Sciences</span>
+        </div>
+      </article>
+      <article class="exp-card reveal-child">
+        <div class="exp-num">02</div>
+        <h3 class="exp-title">Advisory · Pinnacle Advisory &amp; Consulting</h3>
+        <p class="exp-desc">Advising teams on product strategy, technology, and organizational change — bringing 25+ years of operating experience to companies navigating complex, cross-functional decisions.</p>
+        <div class="exp-tags">
+          <span>Advising</span>
+          <span>Strategy</span>
+          <span>Change</span>
+        </div>
+      </article>
+      <article class="exp-card reveal-child">
+        <div class="exp-num">03</div>
+        <h3 class="exp-title">HBR Advisory Council</h3>
+        <p class="exp-desc">Member of the Harvard Business Review Advisory Council — contributing perspective on leadership, AI in the enterprise, and the discipline of building durable products.</p>
+        <div class="exp-tags">
+          <span>Leadership</span>
+          <span>AI</span>
+          <span>HBR</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="ventures" id="loves">
+  <div class="wrap">
+    <div class="section-heading reveal">
+      <div class="label">— Five Pursuits —</div>
+      <h2>The things <em>that move me</em></h2>
+    </div>
+
+    <div class="ventures-grid reveal-group">
+      <button class="venture-card reveal-child" type="button" aria-expanded="false">
+        <div class="card-face card-front">
+          <div class="v-num">01 / V</div>
+          <div class="v-title">Work</div>
+          <div class="v-divider"></div>
+          <div class="v-verb">passionate<br/>about it</div>
+          <div class="v-hint">+ tap to read</div>
+        </div>
+        <div class="card-face card-back">
+          <p class="v-story">Twenty-five years in, and the puzzle still pulls me in every morning. The work is the craft — and the craft is what makes a life.</p>
+          <div class="v-close">← close</div>
+        </div>
+      </button>
+      <button class="venture-card reveal-child" type="button" aria-expanded="false">
+        <div class="card-face card-front">
+          <div class="v-num">02 / V</div>
+          <div class="v-title">Family</div>
+          <div class="v-divider"></div>
+          <div class="v-verb">care<br/>for it</div>
+          <div class="v-hint">+ tap to read</div>
+        </div>
+        <div class="card-face card-back">
+          <p class="v-story">The people I come home to are the reason any of it matters. Everything else is just scaffolding around them.</p>
+          <div class="v-close">← close</div>
+        </div>
+      </button>
+      <button class="venture-card reveal-child" type="button" aria-expanded="false">
+        <div class="card-face card-front">
+          <div class="v-num">03 / V</div>
+          <div class="v-title">Music</div>
+          <div class="v-divider"></div>
+          <div class="v-verb">energized<br/>by it</div>
+          <div class="v-hint">+ tap to read</div>
+        </div>
+        <div class="card-face card-back">
+          <p class="v-story">When the day frays, I find my way back to a song. Music doesn't ask anything of me — it just gives, and I leave the room a different person.</p>
+          <div class="v-close">← close</div>
+        </div>
+      </button>
+      <button class="venture-card reveal-child" type="button" aria-expanded="false">
+        <div class="card-face card-front">
+          <div class="v-num">04 / V</div>
+          <div class="v-title">Golf</div>
+          <div class="v-divider"></div>
+          <div class="v-verb">entertained<br/>by it</div>
+          <div class="v-hint">+ tap to read</div>
+        </div>
+        <div class="card-face card-back">
+          <p class="v-story">Four hours, no notifications, one little ball. Golf is the rare place where the only opponent is yesterday's swing.</p>
+          <div class="v-close">← close</div>
+        </div>
+      </button>
+      <button class="venture-card reveal-child" type="button" aria-expanded="false">
+        <div class="card-face card-front">
+          <div class="v-num">05 / V</div>
+          <div class="v-title">Hikes</div>
+          <div class="v-divider"></div>
+          <div class="v-verb">humbled<br/>by them</div>
+          <div class="v-hint">+ tap to read</div>
+        </div>
+        <div class="card-face card-back">
+          <p class="v-story">Mountains don't care about your title. Every trail is a quiet reminder that I'm a small part of something much older and much bigger.</p>
+          <div class="v-close">← close</div>
+        </div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="statement">
+  <div class="wrap reveal">
+    <p class="quote">Most bios list what someone does. Mine lists what moves me — the things I return to, in different rooms, on different days, for different reasons.</p>
+    <div class="attribution">— Hari —</div>
+  </div>
+</section>
+
+<section class="voices" id="voices">
+  <div class="wrap">
+    <div class="section-heading reveal">
+      <div class="label">— Voices —</div>
+      <h2>What <em>colleagues</em> say</h2>
+    </div>
+    <div class="voices-grid reveal-group">
+      <figure class="voice reveal-child">
+        <div class="voice-mark">"</div>
+        <blockquote>He doesn't just create vision — he translates it into practical plans and drives them to completion. Strong judgment, emotional maturity, and a calm, solutions-oriented approach, even in complex or high-pressure situations.</blockquote>
+        <figcaption>— Colleague, on working with Hari</figcaption>
+      </figure>
+      <figure class="voice reveal-child">
+        <div class="voice-mark">"</div>
+        <blockquote>A rare leader who brings together deep technical expertise with an authentic, people-first leadership style. He builds trust quickly and navigates cross-functional dynamics with ease and respect.</blockquote>
+        <figcaption>— Former colleague</figcaption>
+      </figure>
+      <figure class="voice reveal-child">
+        <div class="voice-mark">"</div>
+        <blockquote>He leads with clarity, empathy, and a genuine sense of purpose. His impact is felt not just in the solutions he builds, but in the people he develops along the way.</blockquote>
+        <figcaption>— Long-time collaborator</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap reveal">
+    <div class="label">— Get In Touch —</div>
+    <h2>Let's build<br/>something <em>worth it</em>.</h2>
+    <p class="sub">Always open to a thoughtful conversation about product, people, and what's next.</p>
+    <div class="contact-links">
+      <a class="c-btn" href="mailto:hari.ramachandran@pfizer.com">
+        <span>Email</span>
+        <span>→</span>
+      </a>
+      <a class="c-btn" href="https://www.linkedin.com/in/hariramach" target="_blank" rel="noopener">
+        <span>LinkedIn</span>
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <div><span class="gold-mark"></span>© 2026 Hari Ramachandran</div>
+    <div>All Rights Reserved</div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  // ===== SCROLL REVEAL =====
+  const revealTargets = document.querySelectorAll('.reveal, .reveal-group');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -60px 0px' });
+    revealTargets.forEach((el) => io.observe(el));
+  } else {
+    revealTargets.forEach((el) => el.classList.add('is-visible'));
+  }
+
+  // ===== FLIP CARDS (progressive disclosure on Pursuits) =====
+  const cards = document.querySelectorAll('.venture-card');
+  cards.forEach((card) => {
+    card.addEventListener('click', () => {
+      const wasOpen = card.getAttribute('aria-expanded') === 'true';
+      // Close any other open cards
+      cards.forEach((c) => c.setAttribute('aria-expanded', 'false'));
+      // Toggle this one
+      card.setAttribute('aria-expanded', wasOpen ? 'false' : 'true');
+    });
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && card.getAttribute('aria-expanded') === 'true') {
+        card.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
