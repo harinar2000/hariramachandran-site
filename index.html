@@ -487,6 +487,56 @@
     color: var(--muted);
   }
 
+  /* ===== LATEST WRITING ===== */
+  .writing {
+    padding: 7rem 0;
+    background: var(--paper);
+    border-top: 1px solid var(--rule);
+  }
+  .writing-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .writing-list li {
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.3s ease, padding-left 0.3s ease;
+  }
+  .writing-list li:hover {
+    background: var(--off-white);
+    padding-left: 1rem;
+  }
+  .writing-list a {
+    display: block;
+    padding: 1.5rem 0;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+    font-weight: 400;
+    line-height: 1.35;
+    position: relative;
+    padding-right: 2.5rem;
+    transition: color 0.3s ease;
+  }
+  .writing-list a::after {
+    content: '↗';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    color: var(--muted);
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  .writing-list a:hover { color: var(--gold-deep); }
+  .writing-list a:hover::after {
+    color: var(--gold-deep);
+    transform: translateY(-50%) translate(3px, -3px);
+  }
+
   /* ===== CONTACT ===== */
   .contact {
     background: var(--ink);
@@ -662,6 +712,7 @@
       <li><a href="#experience">Experience</a></li>
       <li><a href="#loves">Pursuits</a></li>
       <li><a href="#voices">Voices</a></li>
+      <li><a href="#writing">Writing</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -837,25 +888,25 @@
   </div>
 </section>
 
-<section class="writing" id="writing" style="padding: 5rem 0; background: #FF0000;">
+<section class="writing" id="writing">
   <div class="wrap">
     <div class="section-heading reveal">
       <div class="label">— Latest Writing —</div>
       <h2>Recent <em>thoughts</em></h2>
     </div>
-    <ul style="list-style: none; padding: 0;">
-      <li style="padding: 1rem 0; border-bottom: 1px solid var(--rule);">
-        <a href="https://medium.com/@hariramach/scope-locking" target="_blank">
-          How we cut Patient Servics scope by 80% — and held the date
+    <ul class="writing-list reveal-group">
+      <li class="reveal-child">
+        <a href="https://medium.com/@hariramach/scope-locking" target="_blank" rel="noopener noreferrer">
+          How we cut Patient Services scope by 80% — and held the date
         </a>
       </li>
-      <li style="padding: 1rem 0; border-bottom: 1px solid var(--rule);">
-        <a href="https://medium.com/@hariramach/dependencies" target="_blank">
+      <li class="reveal-child">
+        <a href="https://medium.com/@hariramach/dependencies" target="_blank" rel="noopener noreferrer">
           Two TBD dependencies, six weeks to Alpha
         </a>
       </li>
-      <li style="padding: 1rem 0;">
-        <a href="https://medium.com/@hariramach/data-quality" target="_blank">
+      <li class="reveal-child">
+        <a href="https://medium.com/@hariramach/data-quality" target="_blank" rel="noopener noreferrer">
           When the data has a typo: the case for a Data Integrity Agent
         </a>
       </li>
