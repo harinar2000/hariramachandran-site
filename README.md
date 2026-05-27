@@ -9,3 +9,4 @@ Single-file HTML/CSS. No build step. Drag the folder onto [Netlify Drop](https:/
 - Plain HTML5 + CSS (no frameworks)
 - Google Fonts: Archivo + Cormorant Garamond + Archivo Narrow + IBM Plex Mono
 - Deployed to Netlify
+# personal-site
